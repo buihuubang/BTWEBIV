@@ -1,0 +1,44 @@
+CREATE TABLE tinhData(
+    maTinh varchar(10) not null PRIMARY KEY,
+    tenTinh varchar(50) not null
+    );
+CREATE TABLE thangData(
+    thang int not null PRIMARY KEY
+    );
+CREATE TABLE tinhtrangData(
+    id int AUTO_INCREMENT PRIMARY KEY,
+    maTinh varchar(10),
+    thang int,
+    FOREIGN KEY (maTinh) REFERENCES tinh(maTinh),
+    FOREIGN KEY (thang) REFERENCES thangData(thang)
+    );
+
+//CO PHIEU
+CREATE TABLE congty(
+    id int AUTO_INCREMENT PRIMARY KEY not null,
+    MaCT varchar(10) not null,
+    TenCT varchar(50) not null,
+    DiaChi varchar(50) not null
+);
+CREATE TABLE giaodich(
+    id int AUTO_INCREMENT PRIMARY KEY not null,
+    MaThang varchar(10) not null, 
+    MaCT varchar(10) not null,
+    Mua int not null,
+    Ban int not null
+);
+CREATE TABLE thang(
+    id int AUTO_INCREMENT PRIMARY KEY not null,
+    MaThang varchar(10) not null,
+    Thang int not null 
+)
+
+//Queries
+SELECT t.Thang, c.TenCT, g.Mua, g.Ban 
+FROM giaodich as g 
+LEFT JOIN thang as t ON g.MaThang = t.MaThang
+LEFT JOIN congty as c ON g.MaCT = c.MaCT
+WHERE t.MaThang = g.MaThang AND c.MaCT = g.MaCT
+
+
+    

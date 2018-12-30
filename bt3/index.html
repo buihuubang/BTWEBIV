@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!--AIzaSyCBT7ZHBL3cu_oXn-_TLm7xmlL_22DlJVI-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tìm Khu Vui Chơi</title>
+    <!--Chèn Bootstrap cho trang web-->
+    <link href="Bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!--Chèn script vào-->
+    <script type="text/javascript" src="jquery/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="Javascript/contactAPI.js"></script>
+</head>
+
+<body>
+
+<div class="container-fluid" style="background:#F5F5F5">
+
+        <!--CHỨA TIÊU ĐỀ-->
+        <div class="row header">
+            <div class="col-sm center-block" style="text-align:center">
+                <strong><span><img src="./assets/Logo.png" style="max-width:50%"></span></strong>
+            </div>
+        </div>
+
+        <!--CHỨA MENU-->
+        <div class="row">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="min-width:100%;">
+                <a class="navbar-brand" href="#">Sàn chứng khoán</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
+                    aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarText">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Trang chủ <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">HOSE</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">VN30</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">HNX</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">HNX30</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">UPCOM</a>
+                        </li>
+                    </ul>
+                    <span class="navbar-text">
+                        Chứng khoán đầu năm 2019
+                    </span>
+                </div>
+            </nav>
+        </div>
+
+        <!--CHỨA NỘI DUNG, GỒM Ô NHẬP VÀ BẢNG CHỨNG KHOÁN-->
+        <div class="row content align-middle">
+            <div class="col-sm-5 containForm" style="background:#333333; text-align: center;">
+                <strong>
+                <h2 style="color:	#FFFFFF; padding-top: 3%;">Tìm cổ phiếu</h2>
+                </strong><br />
+                <input type="text" class="form-control" id="frmMaCT" placeholder="Nhập mã công ty"><br />
+                <select class="form-control" placeholder="Tháng" id="findThang">
+                    <option value="1">Tháng 1</option>
+                    <option value="2">Tháng 2</option>
+                    <option value="3">Tháng 3</option>
+                </select><br />
+                <input type="button" id="frmBtnSearch" class="btn btn-success" value="Tìm kiếm"> &nbsp; 
+                <input type="button" id="frmBtnReturn" class="btn btn-primary" value="Quay lại"><br /><br />
+                <!--Đăng nhập-->
+                <div id="LoginOut">
+                    <strong>
+                        <h2 style="color:	#FFFFFF; padding-top: 3%;">Đăng nhập</h2>
+                    </strong><br />
+                    <input type="text" class="form-control" id="frmUsr" placeholder="Nhập tên"><br />
+                    <input type="password" class="form-control" id="frmPsw" placeholder="Nhập mật khẩu"><br />
+                    <input type="button" id="frmBtnLogin" class="btn btn-info" value="Đăng nhập">
+                </div>
+                <!--Khi đăng nhập các chức năng này sẽ hiện-->
+                <div id="LoginFunc">
+                    <input type="text" class="form-control" id="createMaCT" placeholder="Nhập mã công ty"><br />
+                    <input type="text" class="form-control" id="createTenCT" placeholder="Nhập tên công ty"><br />
+                    <input type="text" class="form-control" id="createMua" placeholder="Tổng mua"><br />
+                    <input type="text" class="form-control" id="createBan" placeholder="Tổng bán"><br />
+                    <select class="form-control" placeholder="Tháng" id="createThang">
+                        <option value="1">Tháng 1</option>
+                        <option value="2">Tháng 2</option>
+                        <option value="3">Tháng 3</option>
+                    </select><br />
+                    <input type="button" id="frmBtnAdd" class="btn btn-success" value="Thêm"> &nbsp; 
+                    <input type="button" id="frmBtnUpdate" class="btn btn-warning" value="Sửa"> &nbsp; 
+                    <input type="button" id="frmBtnDelete" class="btn btn-danger" value="Xoá"><br /><br />
+                </div>
+            </div>
+            <div class="col-sm-7">
+                <div id="shareTable" style="height:auto;min-height: 460px; min-width: 100%;display: block;overflow-y: auto;-ms-overflow-style: -ms-autohiding-scrollbar;">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Tháng</th>
+                                <th>Mã Công Ty</th>
+                                <th>Tên Công Ty</th>
+                                <th>Tổng Mua</th>
+                                <th>Tổng Bán</th>
+                            </tr>
+                        </thead>
+                        <tbody id="jsonTable">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
