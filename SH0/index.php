@@ -7,7 +7,7 @@
 	<!-- jQuery library -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<!-- font awesome -->
-  <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
+  	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
 	<!-- rating star css -->
   	<link rel="stylesheet" href="js/ratingstar.css">  	
 </head>
@@ -41,16 +41,16 @@
 	    <th>Rating</th>
 	  </tr>
 	</thead>
-	<tbody>
+	<tbody id="tableUsr">
 	<?php 
-		$user = 'root';
-		$password = 'root';
+		$user = 'root'; //Thay user database trong mamp nhu lan truoc vao
+		$password = 'root'; //Thay password vao
 		$db = 'student_db';
 		$host = 'localhost';
-		$port = 8889;
+		$port = 8889; //Thay port vao
 		
 		$link = mysqli_init();
-		$con = mysqli_real_connect(
+		$conn = mysqli_real_connect(
 			 $link,
 			 $host,
 			 $user,
@@ -58,10 +58,9 @@
 			 $db,
 			 $port
 		);
-		if(!$con){
+		if(!$conn){
         die("Connect Error: " . mysqli_connect_error());
     }
-		$sqlGet = "SELECT * FROM records";
 		/*$conn = mysqli_connect('localhost','root','','student_db');*/
 		if($qry = mysqli_query($link,"SELECT * FROM records")){
 			while($show = mysqli_fetch_assoc($qry)){
@@ -108,47 +107,33 @@ $('#rating-student').starrr({
 $("#submit").click(function(){	
 	var namePost = $('#name').val();
 	var emailPost = $('#email').val();
-	alert(rate);
-	alert(namePost);
-	alert(emailPost);
-	/*$.ajax({		
+	//alert(rate);
+	//alert(namePost);
+	//alert(emailPost);
+	$.ajax({		
         url: 'rating.php',
-        type: 'post',
-				dataType: 'text',
+        type: 'POST',
+		dataType: 'text',
         data: {nameP: namePost, emailP: emailPost, ratingP: rate},
         success: function (status) {
         	if(status == "1"){
+							var star;
             	$('.msg').html('<b>Student Inserted !</b>');
+							if(rate==1){ star = "<td><i class='fa fa-star'></i></td>"; }
+							if(rate==2){ star = "<td><i class='fa fa-star'></i><i class='fa fa-star'></i></td>"; }
+							if(rate==3){ star = "<td><i class='fa fa-star'></i><i class='fa fa-star'></i><i class='fa fa-star'></i></td>"; }
+							if(rate==4){ star = "<td><i class='fa fa-star'></i><i class='fa fa-star'></i><i class='fa fa-star'></i><i class='fa fa-star'></i></td>"; }
+							if(rate==5){ star = "<td><i class='fa fa-star'></i><i class='fa fa-star'></i><i class='fa fa-star'></i><i class='fa fa-star'></i><i class='fa fa-star'></i></td>"; }
+							$('#tableUsr').append('<tr> <td>'+namePost+'</td> <td>'+emailPost+'</td>'+star+'</tr>');
         	}else{
             	$('.msg').html('<b>Server side error !</b>');
         	}
         },
 		error: function(error){
-			alert("Error");
+			alert(error);
 		}
-  });*/
-	
-	$.ajax({
-        url: "rating.php",
-        type: "post",
-        dataType: "text",
-        data: {
-            nameP: namePost,
-            emailP: emailPost,
-            ratingP: rate
-        }
-    }).done(function(response){
-        if(response == "1"){
-            $('.msg').html('<b>Student Inserted !</b>');
-        } else {
-            $('.msg').html('<b>Student Insert Error !</b>');
-        }
-    }).fail(function(error){
-        $('.msg').html('Error');
-				var str = JSON.stringify(error);
-				alert(str);
     });
-	
+
 });
 </script>
 </body>
