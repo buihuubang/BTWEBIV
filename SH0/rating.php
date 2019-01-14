@@ -19,12 +19,13 @@ if(isset($_POST)){
       die("Connect Error: " . mysqli_connect_error());
    }
 
+   $mssv = $_POST['mssvP'];
 	$name = $_POST['nameP'];
 	$email = $_POST['emailP'];
 	$rate = $_POST['ratingP'];
 	
 	/*$conn = mysqli_connect('localhost','root','','student_db');*/
-	$stmt = "INSERT INTO records(name,email,rating) VALUES('".$name."','".$email."',".$rate.")";
+	$stmt = "INSERT INTO records(mssv,name,email,rating) VALUES(".$mssv.",'".$name."','".$email."',".$rate.")";
 	$result = mysqli_query($link,$stmt);
 	if($result){
 		echo "1";	

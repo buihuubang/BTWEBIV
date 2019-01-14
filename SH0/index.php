@@ -15,7 +15,11 @@
 <div class="row">
 <div class="col-md-12">
 	<div class="form-group">
-		<div class="form-group has-success has-feedback">
+			<div class="form-group has-success has-feedback">
+		    <label for="mssv">Student ID :</label>
+		    <input type="text" class="form-control" id="mssv">		    
+	  	</div>
+			<div class="form-group has-success has-feedback">
 		    <label for="name">Student Name :</label>
 		    <input type="text" class="form-control" id="name">		    
 	  	</div>
@@ -36,6 +40,7 @@
 <table class="table table-condensed">
 	<thead>
 	  <tr>
+			<th>Student ID</th>
 	    <th>Student Name</th>
 	    <th>Student Email</th>
 	    <th>Rating</th>
@@ -65,6 +70,7 @@
 		if($qry = mysqli_query($link,"SELECT * FROM records")){
 			while($show = mysqli_fetch_assoc($qry)){
 				echo "<tr>";
+					echo "<td>".$show['mssv']."</td>";
 					echo "<td>".$show['name']."</td>";					
 					echo "<td>".$show['email']."</td>";					
 					if($show['rating']==1){ echo "<td><i class='fa fa-star'></i></td>"; }
@@ -104,7 +110,8 @@ $('#rating-student').starrr({
   }
 });
 // ajax submit
-$("#submit").click(function(){	
+$("#submit").click(function(){
+	var mssvPost = $('#mssv').val();
 	var namePost = $('#name').val();
 	var emailPost = $('#email').val();
 	//alert(rate);
@@ -114,7 +121,7 @@ $("#submit").click(function(){
         url: 'rating.php',
         type: 'POST',
 		dataType: 'text',
-        data: {nameP: namePost, emailP: emailPost, ratingP: rate},
+        data: {mssvP: mssvPost,nameP: namePost, emailP: emailPost, ratingP: rate},
         success: function (status) {
         	if(status == "1"){
 							var star;
@@ -124,9 +131,10 @@ $("#submit").click(function(){
 							if(rate==3){ star = "<td><i class='fa fa-star'></i><i class='fa fa-star'></i><i class='fa fa-star'></i></td>"; }
 							if(rate==4){ star = "<td><i class='fa fa-star'></i><i class='fa fa-star'></i><i class='fa fa-star'></i><i class='fa fa-star'></i></td>"; }
 							if(rate==5){ star = "<td><i class='fa fa-star'></i><i class='fa fa-star'></i><i class='fa fa-star'></i><i class='fa fa-star'></i><i class='fa fa-star'></i></td>"; }
-							$('#tableUsr').append('<tr> <td>'+namePost+'</td> <td>'+emailPost+'</td>'+star+'</tr>');
+							$('#tableUsr').append('<tr><td>'+mssvPost+'</td> <td>'+namePost+'</td> <td>'+emailPost+'</td>'+star+'</tr>');
         	}else{
-            	$('.msg').html('<b>Server side error !</b>');
+            	$('.msg').html('<b>Student insert error!</b>');
+							alert("Sinh viên đã đánh giá");
         	}
         },
 		error: function(error){

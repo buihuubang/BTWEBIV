@@ -1,6 +1,6 @@
 CREATE DATABASE student_db;
 CREATE TABLE records(
-    id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    mssv int NOT NULL PRIMARY KEY,
     name varchar(50) NOT NULL,
     email varchar(50) NOT NULL,
     rating int NOT NULL
