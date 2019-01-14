@@ -20,6 +20,8 @@ $(document).ready(function () {
 
 });
 
+/**================================================================================*/
+
 function getShare(){
     $.ajax({
         type: 'POST',
@@ -42,9 +44,13 @@ function getShare(){
     });
 }
 
+/**================================================================================*/
+
 function calculateShare(Thang,Mua,Ban) {
     (Mua > Ban)? alert("Bạn nên mua loại cổ phiếu này trong tháng " + Thang) : alert("Bạn nên bán loại cổ phiếu này trong tháng "+ Thang);
 }
+
+/**================================================================================*/
 
 function findShare(){
     var Thang = "T0" + $("#findThang").val().toString();
@@ -83,6 +89,8 @@ function findShare(){
     }
 }
 
+/**================================================================================*/
+
 function loginShare() {
     $.ajax({
         url: "login.php",
@@ -105,6 +113,8 @@ function loginShare() {
         alert("Login unsuccessful!");
     });
 }
+
+/**================================================================================*/
 
 function addShare(){
     var MaCT = $("#createMaCT").val().toString();
@@ -147,6 +157,8 @@ function addShare(){
     }
 }
 
+/**================================================================================*/
+
 function updateShare() {
     var MaCT = $("#createMaCT").val().toString();
     var ThangNhan = "T0" + $("#createThang").val().toString();
@@ -184,6 +196,8 @@ function updateShare() {
         alert("Bạn nhập thiếu rồi!");
     }
 }
+
+/**================================================================================*/
 
 function deleteShare() {
     var MaCT = $("#createMaCT").val().toString();
